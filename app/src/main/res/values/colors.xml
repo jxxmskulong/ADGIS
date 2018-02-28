@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#33aaff</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!-- 底部栏没按下去文字颜色-->
+    <color name="unPress">#8a8a8a</color>
+    <!-- 底部栏按下去文字颜色-->
+    <color name="press">#303F9F</color>
+    <!-- 白色-->
+    <color name="white">#ffffff</color>
+    <!-- 黑色-->
+    <color name="black">#000000</color>
+
+    <color name="black_overlay">#66000000</color>
+
+    <!--分类标题的背景颜色-->
+    <color name="common_class_color">#F3F3F5</color>
+    <!--通用的分割线的颜色-->
+    <color name="pink">#FF3366</color>
+    <color name="red">#FF0000</color>
+    <!--个人中心相关-->
+    <color name="colorTextContent">#444444</color>
+    <color name="colorTextTitle">#333333</color>
+    <color name="colorTextAssistant">#888888</color>
+    <color name="colorDivison">#33aaaaaa</color>
+    <color name="colorBackgroud">#FFFFFF</color>
+    <color name="colorBackgroudDark">#f2f2f2</color>
+
+    <color name="translucent">#00000000</color>
+    <color name="item_press">#99dfdbdb</color>
+    <color name="item_normal">#fff</color>
+</resources>

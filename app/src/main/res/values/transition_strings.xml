@@ -1,0 +1,4 @@
+<resources>
+    <string name="transition_image">transition_image</string>
+    <string name="detail_image">detail_image</string>
+</resources>

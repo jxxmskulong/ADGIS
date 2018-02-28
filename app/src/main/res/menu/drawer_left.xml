@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/All_ADs"
+            android:icon="@drawable/ic_all"
+            android:title="所有广告" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/logout"
+            android:title="登出" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Slideshow" />
+    </group>
+
+    <item android:title="地图模式切换">
+        <menu android:checkableBehavior="single">
+            <item
+                android:id="@+id/normal_map"
+                android:icon="@drawable/map_normal"
+                android:title="普通地图" />
+            <item
+                android:id="@+id/satellite_map"
+                android:icon="@drawable/map_satellite"
+                android:title="卫星地图" />
+            <item
+                android:id="@+id/night_map"
+                android:icon="@drawable/map_night"
+                android:title="夜间地图" />
+            <item
+                android:id="@+id/bus_map"
+                android:icon="@drawable/map_bus"
+                android:title="公交地图" />
+        </menu>
+    </item>
+
+</menu>

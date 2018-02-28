@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">ADGIS</string>
+
+    <!-- Strings related to login -->
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="permission_title_rationale">权限需求</string>
+    <string name="permission_read_storage_rationale">选择图片时需要读取权限</string>
+    <string name="permission_write_storage_rationale">拍照时需要存储权限</string>
+
+    <string name="label_cancel">取消</string>
+    <string name="label_ok">确定</string>
+    <string name="title_activity_user">UserActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

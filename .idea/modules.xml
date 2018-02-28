@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ADGIS.iml" filepath="$PROJECT_DIR$/ADGIS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bottomdialog/bottomdialog.iml" filepath="$PROJECT_DIR$/bottomdialog/bottomdialog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/expandingpager/expandingpager.iml" filepath="$PROJECT_DIR$/expandingpager/expandingpager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imagewatch/imagewatch.iml" filepath="$PROJECT_DIR$/imagewatch/imagewatch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swipeback/swipeback.iml" filepath="$PROJECT_DIR$/swipeback/swipeback.iml" />
+      <module fileurl="file://$PROJECT_DIR$/toprightmenu/toprightmenu.iml" filepath="$PROJECT_DIR$/toprightmenu/toprightmenu.iml" />
+    </modules>
+  </component>
+</project>

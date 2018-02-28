@@ -1,0 +1,166 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- 加入toolbar溢出【弹出】菜单的风格 -->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+        <item name="android:dropDownListViewStyle">@style/mySpinnerStyle</item>
+    </style>
+
+    <style name="OverflowMenuStyle" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
+        <!-- 是否覆盖锚点，默认为true，即盖住Toolbar -->
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownWidth">wrap_content</item>
+        <item name="android:paddingRight">5dp</item>
+        <!-- 弹出层背景颜色 -->
+        <item name="android:popupBackground">@color/black</item>
+        <!-- 弹出层垂直方向上的偏移，即在竖直方向上距离Toolbar的距离，值为负则会盖住Toolbar -->
+        <item name="android:dropDownVerticalOffset">5dp</item>
+        <!-- 弹出层水平方向上的偏移，即距离屏幕左边的距离，负值会导致右边出现空隙 -->
+        <item name="android:dropDownHorizontalOffset">0dp</item>
+        <!-- 设置弹出菜单文字颜色 -->
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--分割线 -->
+    <style name="mySpinnerStyle" parent="android:style/Widget.ListView.DropDown">
+        <item name="android:divider">@color/black</item>
+        <item name="android:dividerHeight">0.5dp</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <!--弹窗动画-->
+    <style name="PopupWindow">
+        <item name="android:windowEnterAnimation">@anim/window_in</item>
+        <item name="android:windowExitAnimation">@anim/window_out</item>
+    </style>
+
+    <!--这是全部广告界面的主题-->
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!--搜索界面主题-->
+    <style name="TranslucentTheme" parent="AppTheme">
+        <!--是否半透明-->
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!--个人中心相关-->
+
+    <style name="AppTheme.Label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/textsize_content</item>
+        <item name="android:textColor">@color/colorTextContent</item>
+    </style>
+
+    <style name="AppTheme.Label.Title">
+        <item name="android:textColor">@color/colorTextTitle</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="AppTheme.Label.Discription">
+        <item name="android:gravity">top</item>
+        <item name="android:lineSpacingExtra">5dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/textsize_content</item>
+        <item name="android:singleLine">false</item>
+    </style>
+
+    <style name="AppTheme.Label.Layout">
+        <item name="android:paddingTop">@dimen/padding_common_v</item>
+        <item name="android:paddingBottom">@dimen/padding_common_v</item>
+        <item name="android:paddingLeft">@dimen/padding_common_h</item>
+        <item name="android:paddingRight">@dimen/padding_common_h</item>
+    </style>
+
+    <style name="AppTheme.Divison">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/division_line</item>
+        <item name="android:dividerHeight">@dimen/division_line</item>
+        <item name="android:divider">@color/colorDivison</item>
+        <item name="android:background">@color/colorDivison</item>
+    </style>
+
+    <style name="AppTheme.CommonBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AppTheme.CommonBar.Panel">
+        <item name="android:layout_marginTop">@dimen/padding_common</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/bc_background_panel</item>
+    </style>
+
+    <style name="AppTheme.CommonBar.Bar">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:paddingLeft">@dimen/padding_common</item>
+        <item name="android:paddingRight">@dimen/padding_common</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="AppTheme.CommonBar.Content" parent="AppTheme.Label">
+        <item name="android:singleLine">false</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">@dimen/padding_common</item>
+        <item name="android:paddingBottom">@dimen/padding_common</item>
+        <item name="android:paddingLeft">@dimen/padding_common_d</item>
+        <item name="android:paddingRight">@dimen/padding_common_d</item>
+        <item name="android:drawablePadding">@dimen/padding_common</item>
+    </style>
+
+    <style name="AppTheme.CommonBar.Content.Value">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AppTheme.Toolbar" parent="Widget.AppCompat.ActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <!--ADsDetai界面-->
+    <declare-styleable name="DragScrollDetailsLayout">
+        <!-- float value for indicate the moment of switch panel-->
+        <attr name="percent" format="float"/>
+        <!-- how long the animation keep-->
+        <attr name="duration" format="integer"/>
+        <!-- default panel to show after init-->
+        <attr name="default_panel" format="enum">
+            <enum name="front" value="0"/>
+            <enum name="behind" value="1"/>
+        </attr>
+    </declare-styleable>
+    <!--拖动图片界面界面-->
+    <style name="translucent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground" >@color/translucent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+</resources>
