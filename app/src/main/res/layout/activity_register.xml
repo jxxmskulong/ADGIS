@@ -8,8 +8,6 @@
     android:id="@+id/all"
     tools:context="com.xia.adgis.Register.RegisterActivity">
 
-    <!-- Login progress -->
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -17,14 +15,6 @@
         android:layout_height="15dp"
         android:max="300"/>
 
-    <ProgressBar
-        android:id="@+id/register_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
     <ScrollView
         android:id="@+id/register_form"
         android:layout_width="match_parent"
@@ -51,44 +41,37 @@
                     android:layout_height="25dp"
                     android:gravity="left"
                     android:src="@drawable/close" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="start"
+                    android:text="输入手机号码"
+                    android:textSize="40dp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="45dp"
+                    android:src="@drawable/phone" />
 
-
-                    <TextView
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+                    <EditText
+                        android:id="@+id/register_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
-                        android:gravity="left"
-                        android:text="输入手机号码"
-                        android:textSize="40dp" />
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="45dp"
-                        android:src="@drawable/phone" />
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp">
-
-                        <EditText
-                            android:id="@+id/register_phone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableEnd="@drawable/close"
-                            android:hint="手机号码"
-                            android:imeActionId="@+id/login"
-                            android:imeActionLabel="@string/action_sign_in_short"
-                            android:imeOptions="actionUnspecified"
-                            android:inputType="phone"
-                            android:maxLines="1"
-                            android:singleLine="true" />
-
+                        android:drawableEnd="@drawable/close"
+                        android:hint="手机号码"
+                        android:imeActionId="@+id/login"
+                        android:imeActionLabel="@string/action_sign_in_short"
+                        android:imeOptions="actionUnspecified"
+                        android:inputType="phone"
+                        android:maxLines="1" />
                     </android.support.design.widget.TextInputLayout>
 
                     <Button
@@ -102,7 +85,6 @@
                         android:text="下一步"
                         android:textStyle="bold"
                         android:layout_marginBottom="10dp"/>
-
             </LinearLayout>
 
             <LinearLayout
@@ -110,8 +92,44 @@
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/back2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:gravity="start"
+                    android:src="@drawable/close" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="start"
+                    android:layout_marginTop="10dp"
+                    android:text="选择头像"
+                    android:textSize="40dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/camera"
+                    android:id="@+id/main_frag_picture_iv"
+                    android:layout_width="320dp"
+                    android:layout_height="320dp"
+                    android:layout_gravity="center" />
+
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/next_move2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/main_button"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:text="下一步"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
 
             </LinearLayout>
 

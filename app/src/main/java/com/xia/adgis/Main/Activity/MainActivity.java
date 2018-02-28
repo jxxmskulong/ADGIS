@@ -253,7 +253,7 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
         //加载数据
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setCancelable(false);
+        progressDialog.setCancelable(true);
         progressDialog.setMessage("加载中");
         progressDialog.show();
 
