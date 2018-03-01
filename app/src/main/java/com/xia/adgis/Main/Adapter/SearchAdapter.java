@@ -74,6 +74,19 @@ public class SearchAdapter extends BaseAdapter{
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(mContext, ADsDetailActivity.class);
+                intent.putExtra("data",mData.get(position).url);
+                ActivityCompat.startActivity(mContext,intent,
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                mContext,
+                                new Pair<>(view, "detail_image"))
+                                .toBundle());
+            }
+        });
+
+        image.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
                 View v = SearchActivity.lvResults.getChildAt(0);
                 //相对于其父视图的顶部位置
                 int top = v.getTop();
@@ -92,19 +105,6 @@ public class SearchAdapter extends BaseAdapter{
                 intent.putExtra("index", position);
                 intent.putExtra("type", 1);//list传1
                 mContext.startActivity(intent);
-            }
-        });
-
-        image.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                Intent intent = new Intent(mContext, ADsDetailActivity.class);
-                intent.putExtra("data",mData.get(position).url);
-                ActivityCompat.startActivity(mContext,intent,
-                        ActivityOptionsCompat.makeSceneTransitionAnimation(
-                                mContext,
-                                new Pair<>(view, "detail_image"))
-                                .toBundle());
                 return false;
             }
         });
