@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.xia.adgis.Login.Adapter.UserNameHistoryAdapter;
 import com.xia.adgis.Login.DataBase.UserSqliteHelper;
+import com.xia.adgis.Main.Activity.ForgetPassWordActivity;
 import com.xia.adgis.Main.Activity.MainActivity;
 import com.xia.adgis.R;
 import com.xia.adgis.Register.RegisterActivity;
@@ -59,35 +60,13 @@ public class LoginActivity extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
     private CheckBox checkbox;
-    private TextView register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //隐藏软键盘
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
         // 设置登录表单。
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.email);
-        //文本框右边可清空
-        mUsernameView.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                // et.getCompoundDrawables()得到一个长度为4的数组，分别表示左右上下四张图片
-                Drawable drawable = mUsernameView.getCompoundDrawables()[2];
-                //如果右边没有图片，不再处理
-                if (drawable == null)
-                    return false;
-                //如果不是按下事件，不再处理
-                if (motionEvent.getAction() != MotionEvent.ACTION_UP)
-                    return false;
-                if (motionEvent.getX() > mUsernameView.getWidth()
-                        - mUsernameView.getPaddingRight()
-                        - drawable.getIntrinsicWidth()){
-                    mUsernameView.setText("");
-                }
-                return false;
-            }
-        });
+
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -134,12 +113,22 @@ public class LoginActivity extends AppCompatActivity {
         checkIsRemenber();
 
         //开启注册界面
-        register = (TextView) findViewById(R.id.register);
-        register.setOnClickListener(new OnClickListener() {
+        findViewById(R.id.register).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.in,R.anim.out);
+            }
+        });
+
+        //忘记密码
+        findViewById(R.id.forget_pass).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, ForgetPassWordActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.in,R.anim.out);
             }
         });
     }
@@ -281,14 +270,9 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
 
             try {
-                // Simulate network access.
                 Thread.sleep(300);
-                //final BmobUser bmobUser = new BmobUser();
-                //bmobUser.setUsername(mEmail);
-                //bmobUser.setPassword(mPassword);
                 BmobUser.loginByAccountObservable(BmobUser.class,mEmail,mPassword).subscribe(new Subscriber<BmobUser>() {
                     @Override
                     public void onCompleted() {

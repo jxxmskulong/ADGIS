@@ -434,8 +434,8 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
         mAMap.clear();
         tempLatLng.clear();
         tempMarker.clear();
-        LatLng latLng = null;
-        MarkerOptions markerOptions = null;
+        LatLng latLng;
+        MarkerOptions markerOptions;
         for(AD ad : ads){
             latLng = new LatLng(ad.getLatitude(),ad.getLongitude());
             tempLatLng.add(latLng);

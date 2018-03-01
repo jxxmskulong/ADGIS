@@ -7,7 +7,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '26.0.3'
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
     sourceSets {
@@ -40,7 +40,6 @@ dependencies {
     //主界面右上角弹窗
     compile project(':toprightmenu')
     compile project(':imagewatch')
-    compile project(':expandingpager')
     compile project(':swipeback')
     compile project(':bottomdialog')
     //网络框架Okhttp

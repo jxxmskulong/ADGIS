@@ -64,8 +64,9 @@
             android:label="@string/title_activity_fullscreen"
             android:theme="@style/FullscreenTheme" />
         <!-- 注册界面 -->
-        <activity android:name=".Register.RegisterActivity"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"/>
+        <activity
+            android:name=".Register.RegisterActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <!-- 注册的图片裁剪界面 -->
         <activity android:name=".CropActivity" />
 
@@ -99,6 +100,7 @@
         <activity
             android:name=".DragPhotoActivity"
             android:theme="@style/translucent" />
+        <activity android:name=".Main.Activity.ForgetPassWordActivity"></activity>
     </application>
 
 </manifest>

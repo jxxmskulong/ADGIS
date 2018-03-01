@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.xia.adgis.DragPhotoActivity">
 
-    <com.xia.adgis.Utils.FixMultiViewPager
+    <com.xia.adgis.Utils.DragPhotoView.FixMultiViewPager
         android:id="@+id/drag_photo_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

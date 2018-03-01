@@ -2,7 +2,7 @@
  * FixMultiViewPager 2016-12-26
  * Copyright (c) 2016 suzeyu Co.Ltd. All right reserved
  */
-package com.xia.adgis.Utils;
+package com.xia.adgis.Utils.DragPhotoView;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

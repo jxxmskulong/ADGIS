@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +22,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.example.myphotoview.Info;
+import com.example.myphotoview.MyPhotoView;
 import com.scwang.smartrefresh.layout.util.DensityUtil;
 import com.xia.adgis.Main.Fragment.ADsCompanyFragment;
 import com.xia.adgis.Main.Fragment.ADsMaintainFragment;
@@ -35,6 +39,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import uk.co.senab.photoview.PhotoView;
 
 public class ADsDetailActivity extends AppCompatActivity {
 
@@ -58,6 +63,7 @@ public class ADsDetailActivity extends AppCompatActivity {
     TextView title;
     private int mScrollY = 0;
 
+    //碎片
     ADsPhysicalFragment aDsPhysicalFragment;
     ADsMessageFragment aDsMessageFragment;
     ADsCompanyFragment aDsCompanyFragment;
@@ -188,8 +194,8 @@ public class ADsDetailActivity extends AppCompatActivity {
         });
     }
 
-    class TabAdapter extends FragmentPagerAdapter {
-        public TabAdapter(FragmentManager fm) {
+    private class TabAdapter extends FragmentPagerAdapter {
+        private TabAdapter(FragmentManager fm) {
             super(fm);
         }
 

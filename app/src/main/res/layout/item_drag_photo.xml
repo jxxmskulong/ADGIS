@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.xia.adgis.Utils.DragPhotoView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.xia.adgis.Utils.DragPhotoView.DragPhotoView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:scaleType="fitCenter">
 
-</com.xia.adgis.Utils.DragPhotoView>
+</com.xia.adgis.Utils.DragPhotoView.DragPhotoView>

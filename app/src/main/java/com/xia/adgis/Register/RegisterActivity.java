@@ -623,6 +623,12 @@ public class RegisterActivity extends AppCompatActivity implements PopupWindow.O
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.in_1,R.anim.out_1);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         imagePath = "1";

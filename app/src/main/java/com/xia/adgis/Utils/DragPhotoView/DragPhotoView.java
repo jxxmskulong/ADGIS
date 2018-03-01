@@ -1,4 +1,4 @@
-package com.xia.adgis.Utils;
+package com.xia.adgis.Utils.DragPhotoView;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
