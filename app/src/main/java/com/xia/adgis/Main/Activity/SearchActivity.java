@@ -3,9 +3,9 @@ package com.xia.adgis.Main.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -21,6 +21,7 @@ import com.xia.adgis.Main.Adapter.UserNameHistoryAdapter;
 import com.xia.adgis.Main.Bean.AD;
 import com.xia.adgis.Main.Bean.SearchItem;
 import com.xia.adgis.Main.DataBase.HistorySqliteHelpter;
+import com.xia.adgis.Main.Tool.StatusBarUtil;
 import com.xia.adgis.Utils.SearchView;
 import com.xia.adgis.R;
 
@@ -88,22 +89,22 @@ public class SearchActivity extends SwipeBackActivityImpl implements SearchView.
      */
     private static int hintSize = DEFAULT_HINT_SIZE;
 
-    /**
-     * 设置提示框显示项的个数
-     *
-     * @param hintSize 提示框显示个数
-     */
+    int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            |View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            |View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
     public static void setHintSize(int hintSize) {
         SearchActivity.hintSize = hintSize;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_search);
+        getWindow().getDecorView().setSystemUiVisibility(option);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
         initData();
         initViews();
         SearchView.isShow = false;
+        StatusBarUtil.setPaddingSmart(this,searchView);
     }
 
     /**
@@ -159,8 +160,8 @@ public class SearchActivity extends SwipeBackActivityImpl implements SearchView.
             temp.title = temps.get(i).getName();
             temp.url = temps.get(i).getImageID();
             temp.content = "待完善";
-            temp.width = 1024;
-            temp.height = 1024;
+            temp.width = 1400;
+            temp.height = 1400;
             temp.latitude = temps.get(i).getLatitude();
             temp.longitude = temps.get(i).getLongitude();
             dbData.add(temp);

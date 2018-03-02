@@ -74,19 +74,6 @@ public class SearchAdapter extends BaseAdapter{
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, ADsDetailActivity.class);
-                intent.putExtra("data",mData.get(position).url);
-                ActivityCompat.startActivity(mContext,intent,
-                        ActivityOptionsCompat.makeSceneTransitionAnimation(
-                                mContext,
-                                new Pair<>(view, "detail_image"))
-                                .toBundle());
-            }
-        });
-
-        image.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
                 View v = SearchActivity.lvResults.getChildAt(0);
                 //相对于其父视图的顶部位置
                 int top = v.getTop();
@@ -96,15 +83,27 @@ public class SearchAdapter extends BaseAdapter{
                 bdInfo.y = SearchActivity.searchView.getHeight() + RCommonUtil.dip2px(mContext, 8) + (position - firstVisiblePosition) * RCommonUtil.dip2px(mContext, 82f) + top + SearchActivity.lvResults.getTop();
 
                 //关于imageView想要有多宽
-                bdInfo.width = image.getLayoutParams().width;
-                bdInfo.height = image.getLayoutParams().height;
-
+                bdInfo.width = image.getWidth();
+                bdInfo.height = image.getHeight();
                 Intent intent = new Intent(mContext, RolloutPreviewActivity.class);
                 intent.putExtra("data", (Serializable) mData);
                 intent.putExtra("bdinfo", bdInfo);
                 intent.putExtra("index", position);
                 intent.putExtra("type", 1);//list传1
                 mContext.startActivity(intent);
+            }
+        });
+
+        image.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent = new Intent(mContext, ADsDetailActivity.class);
+                intent.putExtra("data",mData.get(position).url);
+                ActivityCompat.startActivity(mContext,intent,
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                mContext,
+                                new Pair<>(view, "detail_image"))
+                                .toBundle());
                 return false;
             }
         });

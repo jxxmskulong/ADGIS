@@ -75,7 +75,7 @@ public class RolloutPreviewActivity extends RolloutBaseActivity implements ViewP
         viewpager.setCurrentItem(index);
 
         if (type == 1) {
-            moveheight = RCommonUtil.dip2px(this, 70);
+            moveheight = RCommonUtil.dip2px(this, 82f);
         } else if (type == 2) {
             moveheight = (Width - 3 * RCommonUtil.dip2px(this, 2)) / 3;
         } else if (type == 3) {
