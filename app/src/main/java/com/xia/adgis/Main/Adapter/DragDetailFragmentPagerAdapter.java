@@ -6,12 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Author: hzlishang
- * Data: 16/7/30 下午11:27
- * Des:
- * version:
- */
 public abstract class DragDetailFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private View mCurrentView;

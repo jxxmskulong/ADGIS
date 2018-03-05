@@ -34,8 +34,8 @@ public class SearchActivity extends SwipeBackActivityImpl implements SearchView.
     /**
      * 滑动切换效果
      */
-
     SmartRefreshLayout smartRefreshLayout;
+
     /**
      * 搜索结果列表view
      */
@@ -45,7 +45,6 @@ public class SearchActivity extends SwipeBackActivityImpl implements SearchView.
      * 搜索view
      */
     public static SearchView searchView;
-
 
     /**
      * 热搜框列表adapter
@@ -92,9 +91,7 @@ public class SearchActivity extends SwipeBackActivityImpl implements SearchView.
     int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
             |View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             |View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-    public static void setHintSize(int hintSize) {
-        SearchActivity.hintSize = hintSize;
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -174,9 +171,6 @@ public class SearchActivity extends SwipeBackActivityImpl implements SearchView.
      */
     private void getSearchHistoryData() {
         hintData = new ArrayList<>(hintSize);
-        /*for (int i = 1; i <= hintSize; i++) {
-            hintData.add("热搜版" + i + "：Android自定义View");
-        }*/
         HistorySqliteHelpter helpter = new HistorySqliteHelpter(SearchActivity.this);
         SQLiteDatabase database = helpter.getWritableDatabase();
         try {
@@ -267,7 +261,6 @@ public class SearchActivity extends SwipeBackActivityImpl implements SearchView.
             resultAdapter.notifyDataSetChanged();
         }
         Toast.makeText(this, searchView.etInput.getText(), Toast.LENGTH_SHORT).show();
-        //SearchView.smartRefreshLayout.setVisibility(View.GONE);
         //加入历史记录
         HistorySqliteHelpter helpter = new HistorySqliteHelpter(SearchActivity.this);
         SQLiteDatabase database = helpter.getWritableDatabase();

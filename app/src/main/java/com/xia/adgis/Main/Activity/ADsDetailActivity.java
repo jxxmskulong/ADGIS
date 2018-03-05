@@ -1,6 +1,7 @@
 package com.xia.adgis.Main.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -32,12 +34,15 @@ import com.xia.adgis.Utils.DragScrollDetailsLayout;
 import com.xia.adgis.R;
 import com.xia.imagewatch.GlideProgress.ProgressInterceptor;
 import com.xia.imagewatch.GlideProgress.ProgressListener;
+import com.xia.imagewatch.RolloutBDInfo;
+import com.xia.imagewatch.RolloutInfo;
+import com.xia.imagewatch.RolloutPreviewActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import uk.co.senab.photoview.PhotoView;
 
 public class ADsDetailActivity extends AppCompatActivity {
 
@@ -60,7 +65,11 @@ public class ADsDetailActivity extends AppCompatActivity {
     @BindView(R.id.detailTitle)
     TextView title;
     private int mScrollY = 0;
-
+    //图片浏览相关
+    private ArrayList<RolloutInfo> data = new ArrayList<>();
+    protected RolloutBDInfo bdInfo;
+    protected RolloutInfo imageInfo;
+    private String imageID;
     //碎片
     ADsPhysicalFragment aDsPhysicalFragment;
     ADsMessageFragment aDsMessageFragment;
@@ -111,22 +120,6 @@ public class ADsDetailActivity extends AppCompatActivity {
         adapter = new TabAdapter(getSupportFragmentManager());
         //TabLayout与ViewPager关联
         //ViewPager滑动关联TabLayout
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                //mTabLayout.setScrollPosition(position, 0, false);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
         mTabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(adapter);
         mDragScrollDetailsLayout.setOnSlideDetailsListener(new DragScrollDetailsLayout.OnSlideFinishListener() {
@@ -156,7 +149,7 @@ public class ADsDetailActivity extends AppCompatActivity {
             }
         });
         //加载
-        final String imageID = getIntent().getStringExtra("data");
+        imageID = getIntent().getStringExtra("data");
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setCancelable(false);
@@ -183,14 +176,39 @@ public class ADsDetailActivity extends AppCompatActivity {
                         ProgressInterceptor.removeListener(imageID);
                     }
                 });
-
+        //初始化图像
+        initImage();
         imageDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int location[] = new int[2];
+                imageDetail.getLocationOnScreen(location);
+                bdInfo.x = location[0];
+                bdInfo.y = location[1];
+                //视图布局的宽高
+                bdInfo.width = imageDetail.getWidth();
+                bdInfo.height = imageDetail.getHeight();
+                Intent intent = new Intent(ADsDetailActivity.this, RolloutPreviewActivity.class);
+                intent.putExtra("data", (Serializable) data);
+                intent.putExtra("bdinfo",bdInfo);
+                intent.putExtra("type", 0);//单图传0
+                intent.putExtra("index",0);
+                startActivity(intent);
             }
         });
     }
+
+    private void initImage(){
+        data = new ArrayList<>();
+        bdInfo = new RolloutBDInfo();
+        imageInfo = new RolloutInfo();
+        imageInfo.width = 1440;
+        imageInfo.height = 1600;
+
+        imageInfo.url = imageID;
+        data.add(imageInfo);
+    }
+
 
     private class TabAdapter extends FragmentPagerAdapter {
         private TabAdapter(FragmentManager fm) {
