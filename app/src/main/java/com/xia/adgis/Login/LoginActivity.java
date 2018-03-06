@@ -281,6 +281,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable throwable) {
+                        Toast.makeText(LoginActivity.this,throwable.getMessage(), Toast.LENGTH_SHORT).show();
                         Toast.makeText(getBaseContext(), "登录失败", Toast.LENGTH_SHORT).show();
                         mAuthTask = null;
                         showProgress(false);

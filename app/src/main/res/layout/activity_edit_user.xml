@@ -44,8 +44,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginTop="10dp"
-                    android:layout_toLeftOf="@+id/ic_right"
-                    android:src="@drawable/nav_icon" />
+                    android:layout_toLeftOf="@+id/ic_right" />
 
                 <ImageView
                     android:id="@+id/ic_right"

@@ -1,7 +1,5 @@
 package com.xia.adgis.Register;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;

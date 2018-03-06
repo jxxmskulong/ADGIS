@@ -3,7 +3,6 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
     <ImageView
-        android:src="@drawable/icon"
         android:id="@+id/item_search_icon"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"

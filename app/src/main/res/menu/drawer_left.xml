@@ -4,16 +4,17 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/All_ADs"
-            android:icon="@drawable/ic_all"
+            android:icon="@drawable/ic_all_ads"
             android:title="所有广告" />
         <item
-            android:id="@+id/logout"
-            android:icon="@drawable/logout"
-            android:title="登出" />
+            android:id="@+id/setting"
+            android:icon="@drawable/ic_settings"
+            android:title="设置" />
+
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/aboutUs_menu"
+            android:icon="@drawable/ic_about_us"
+            android:title="关于我们" />
     </group>
 
     <item android:title="地图模式切换">

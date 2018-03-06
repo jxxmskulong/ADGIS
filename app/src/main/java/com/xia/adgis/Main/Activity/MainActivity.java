@@ -690,12 +690,12 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
                         //Intent intent = new Intent(MainActivity.this,AllADsActivity.class);
                         //startActivity(intent);
                         break;
-                    case R.id.logout:
-                        break;
-                    case R.id.nav_slideshow:
+                    case R.id.setting:
                         Intent intent = new Intent(MainActivity.this,SettingActivity.class);
                         startActivityForResult(intent,SETTING);
                         overridePendingTransition(R.anim.in,R.anim.out);
+                        break;
+                    case R.id.aboutUs_menu:
                         break;
                     case R.id.normal_map:
                         mAMap.setMapType(AMap.MAP_TYPE_NORMAL);
