@@ -58,7 +58,6 @@
             </FrameLayout>
 
             <LinearLayout
-                android:id="@+id/forget_pass_check_phone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -153,32 +152,12 @@
                         android:text="发送验证码" />
                 </LinearLayout>
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="65dp"
-                    android:padding="8dp">
-                    <TextView
-                        android:id="@+id/confirm_code"
-                        android:layout_width="match_parent"
-                        android:clickable="true"
-                        android:background="@drawable/cancel_buttom"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:text="确认" />
-                </FrameLayout>
-
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/forget_pass_change_pass"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="15dp"
                 android:padding="8dp"
                 android:orientation="vertical">
 
