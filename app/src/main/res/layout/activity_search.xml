@@ -8,11 +8,11 @@
     android:orientation="vertical"
     tools:context="com.xia.adgis.Main.Activity.SearchActivity">
 
-    <com.xia.adgis.Utils.SearchView
+    <com.xia.adgis.Utils.MySearchView.SearchView
         android:id="@+id/main_search_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </com.xia.adgis.Utils.SearchView>
+    </com.xia.adgis.Utils.MySearchView.SearchView>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"

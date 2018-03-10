@@ -57,22 +57,22 @@
                 android:layout_toEndOf="@+id/imageView"
                 android:clickable="true"/>
             <ImageView
-                android:id="@+id/search"
+                android:id="@+id/preferences"
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize"
-                android:src="@drawable/ic_search"
+                android:src="@drawable/ic_preferences"
                 android:background="?android:attr/selectableItemBackground"
                 android:scaleType="center"
                 android:layout_alignParentRight="true"/>
 
             <ImageView
-                android:id="@+id/location"
+                android:id="@+id/search"
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/search"
+                android:layout_toStartOf="@+id/preferences"
                 android:scaleType="center"
-                android:src="@drawable/ic_location"
+                android:src="@drawable/ic_search"
                 android:background="?android:attr/selectableItemBackground"/>
 
         </RelativeLayout>
@@ -174,7 +174,30 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/white"
-        app:headerLayout="@layout/nav_header"
+        app:headerLayout="@layout/left_nav_header"
         app:menu="@menu/drawer_left" />
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="@color/white">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                    <android.support.design.widget.NavigationView
+                        android:id="@+id/right_nav_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:headerLayout="@layout/right_nav_header"
+                        app:menu="@menu/drawer_right"/>
+                    <fragment
+                        android:id="@+id/main_setting"
+                        android:layout_width="match_parent"
+                        android:layout_height="380dp"
+                        android:name="com.xia.adgis.Main.Fragment.SettingFragment"
+                        android:layout_marginBottom="10dp"/>
+            </LinearLayout>
+        </ScrollView>
 </android.support.v4.widget.DrawerLayout>

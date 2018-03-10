@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+<PreferenceCategory
+    android:title="地图偏好设置">
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/pref_chose_map_types"
+        android:entryValues="@array/pref_chose_map_values"
+        android:key="preference_chose_map"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="地图模式" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="preference_traffic"
+        android:title="地图旋转"
+        android:summaryOff="关闭"
+        android:summaryOn="开启"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="界面偏好设置">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="preference_hide_ui"
+            android:title="轻触地图隐藏UI"
+            android:summaryOff="关闭"
+            android:summaryOn="开启"/>
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="preference_history"
+            android:title="记忆位置"
+            android:summaryOff="关闭"
+            android:summaryOn="开启"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

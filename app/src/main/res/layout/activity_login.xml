@@ -1,18 +1,15 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    xmlns:wave="http://schemas.android.com/apk/res-auto"
     tools:context="com.xia.adgis.Login.LoginActivity">
 
     <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"
+        android:layout_gravity="center"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,10 +21,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.xia.adgis.Utils.WaveViewBySinCos
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp"
+                    wave:waveAmplitude="15dp"
+                    wave:waveFillType="top"
+                    wave:waveSpeed="1"
+                    wave:waveStart="true"
+                    wave:waveColor="#cc303F9F"
+                    wave:waveStartPeriod="1"
+                    wave:waveType="sin" />
+
+                <com.xia.adgis.Utils.WaveViewBySinCos
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp"
+                    wave:waveAmplitude="15dp"
+                    wave:waveFillType="top"
+                    wave:waveColor="#cc303F9F"
+                    wave:waveSpeed="1"
+                    wave:waveStart="true"
+                    wave:waveStartPeriod="0.5"
+                    wave:waveType="sin" />
+            </FrameLayout>
+
         <LinearLayout
-            android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
             android:orientation="vertical">
 
             <ImageView
@@ -54,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp">
 
-                <AutoCompleteTextView
+                <com.xia.adgis.Utils.ClearAutoCompleteTextView
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -130,5 +161,6 @@
                     android:layout_alignParentStart="true" />
             </RelativeLayout>
         </LinearLayout>
+        </FrameLayout>
     </ScrollView>
-</LinearLayout>
+</FrameLayout>

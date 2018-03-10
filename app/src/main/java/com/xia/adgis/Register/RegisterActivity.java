@@ -48,6 +48,7 @@ import com.xia.adgis.Login.LoginActivity;
 import com.xia.adgis.R;
 import com.xia.adgis.Register.Bean.User;
 import com.xia.adgis.Register.check.PhoneCheck;
+import com.xia.adgis.Utils.ClearEditText;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -73,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity implements PopupWindow.O
     @BindView(R.id.back1)
     ImageView firstBack;
     @BindView(R.id.register_phone)
-    EditText userPhone;
+    ClearEditText userPhone;
     @BindView(R.id.next_move1)
     Button firstNextMove;
     //注册第二个界面
@@ -94,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity implements PopupWindow.O
     @BindView(R.id.user_icon)
     CircleImageView userIcon;
     @BindView(R.id.register_username)
-    EditText userName;
+    ClearEditText userName;
     @BindView(R.id.register_password)
     EditText userPassWord;
     @BindView(R.id.register_password1)
@@ -294,7 +295,7 @@ public class RegisterActivity extends AppCompatActivity implements PopupWindow.O
         if (popupWindow != null && popupWindow.isShowing()) {
             return;
         }
-        view = LayoutInflater.from(this).inflate(R.layout.edit_icon_popwindow,null);
+        view = LayoutInflater.from(this).inflate(R.layout.edit_icon_popwindow, null);
         popupWindow = new PopupWindow(view, RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         //设置背景,这个没什么效果，不添加会报错
@@ -539,13 +540,13 @@ public class RegisterActivity extends AppCompatActivity implements PopupWindow.O
 
     //密码是否太短
     private boolean isPasswordValid(String password) {
-        return password.length() > 6;
+        return password.length() > 5;
     }
 
     /**
      * *表示用于认证用户的异步登录/注册任务。
      */
-    public class UserLoginTask extends AsyncTask<Void, Integer, Void> {
+    private class UserLoginTask extends AsyncTask<Void, Integer, Void> {
 
         private final String Name;
         private final String Tel;

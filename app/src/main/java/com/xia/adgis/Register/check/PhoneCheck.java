@@ -1,6 +1,7 @@
 package com.xia.adgis.Register.check;
 
 /**
+ *
  * Created by xiati on 2017/12/9.
  */
 import java.util.ArrayList;
@@ -33,11 +34,14 @@ public class PhoneCheck {
         list.add("185");
         list.add("133");
         list.add("153");
-        list.add("189");
         list.add("180");
+        list.add("181");
         list.add("182");
+        list.add("183");
         list.add("184");
+        list.add("186");
         list.add("187");
+        list.add("189");
     }
     public static boolean checkNumber(String num){
         return list.contains(num);

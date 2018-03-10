@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#33aaff</color>
+    <color name="colorPrimary">#cc33aaff</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ccFF4081</color>
     <!-- 底部栏没按下去文字颜色-->
     <color name="unPress">#8a8a8a</color>
     <!-- 底部栏按下去文字颜色-->

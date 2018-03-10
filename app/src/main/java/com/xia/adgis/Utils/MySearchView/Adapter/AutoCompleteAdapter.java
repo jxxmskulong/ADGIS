@@ -1,6 +1,7 @@
-package com.xia.adgis.Main.Adapter;
+package com.xia.adgis.Utils.MySearchView.Adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,29 +10,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xia.adgis.R;
-import com.xia.adgis.Utils.SearchView;
+import com.xia.adgis.Utils.MySearchView.SearchView;
 
 import java.util.List;
 
 /**
+ *
  * Created by xiati on 2018/1/17.
  */
 
 public class AutoCompleteAdapter extends ArrayAdapter<String> {
 
     private int resourceId;
-    private Context mContext;
     private List<String> list;
 
     public AutoCompleteAdapter(Context context,int textViewResourdeId,List<String> objects){
         super(context,textViewResourdeId,objects);
         resourceId = textViewResourdeId;
-        mContext = context;
         list = objects;
     }
 
     @Override
-    public View getView(int position,  View convertView,  ViewGroup parent) {
+    @NonNull
+    public View getView(int position,  View convertView,  @NonNull ViewGroup parent) {
         final String temp = getItem(position);
 
         final View view;
@@ -61,9 +62,9 @@ public class AutoCompleteAdapter extends ArrayAdapter<String> {
         return view;
     }
 
-    class ViewHolder{
-        public TextView userName;
-        public ImageView userDelete;
+    private class ViewHolder{
+        private TextView userName;
+        private ImageView userDelete;
 
     }
 }

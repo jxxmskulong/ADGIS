@@ -1,7 +1,5 @@
-package com.xia.adgis.Main.Adapter;
+package com.xia.adgis.Utils.MySearchView.Adapter;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -11,14 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.xia.adgis.Main.Activity.ADsDetailActivity;
 import com.xia.adgis.Main.Activity.SearchActivity;
 import com.xia.adgis.R;
-import com.xia.adgis.Main.Bean.SearchItem;
-import com.xia.adgis.Utils.ViewHolder;
+import com.xia.adgis.Utils.MySearchView.Bean.SearchItem;
+import com.xia.adgis.Utils.MySearchView.ViewHolder;
 import com.xia.imagewatch.RCommonUtil;
 import com.xia.imagewatch.RolloutBDInfo;
 import com.xia.imagewatch.RolloutPreviewActivity;
@@ -26,6 +22,7 @@ import com.xia.imagewatch.RolloutPreviewActivity;
 import java.io.Serializable;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class SearchAdapter extends BaseAdapter{
 
     private AppCompatActivity mContext;
@@ -66,7 +63,7 @@ public class SearchAdapter extends BaseAdapter{
     /**
      * get holder convert
      */
-    public void convert(ViewHolder holder, final int position) {
+    private void convert(ViewHolder holder, final int position) {
         holder.setImageResource(R.id.item_search_icon,mData.get(position).url)
                 .setText(R.id.item_search_title,mData.get(position).title)
                 .setText(R.id.item_search_content,"待完善");
@@ -94,11 +91,13 @@ public class SearchAdapter extends BaseAdapter{
             }
         });
 
+
         image.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 Intent intent = new Intent(mContext, ADsDetailActivity.class);
                 intent.putExtra("data",mData.get(position).url);
+
                 ActivityCompat.startActivity(mContext,intent,
                         ActivityOptionsCompat.makeSceneTransitionAnimation(
                                 mContext,

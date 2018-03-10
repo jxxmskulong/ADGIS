@@ -1,9 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:wave="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.xia.adgis.Main.Activity.ForgetPassWordActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.xia.adgis.Main.Activity.ForgetPassWordActivity">
+    android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <ProgressBar
+        android:id="@+id/forget_pass_progress"
+        android:layout_gravity="center"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <ScrollView
+        android:id="@+id/forget_pass_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.xia.adgis.Utils.WaveViewBySinCos
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    wave:waveAmplitude="15dp"
+                    wave:waveFillType="top"
+                    wave:waveSpeed="1"
+                    wave:waveStart="true"
+                    wave:waveColor="@color/colorPrimary"
+                    wave:waveStartPeriod="1"
+                    wave:waveType="sin" />
+
+                <com.xia.adgis.Utils.WaveViewBySinCos
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    wave:waveAmplitude="15dp"
+                    wave:waveFillType="top"
+                    wave:waveColor="@color/colorPrimary"
+                    wave:waveSpeed="1"
+                    wave:waveStart="true"
+                    wave:waveStartPeriod="0.5"
+                    wave:waveType="sin" />
+
+                <android.support.v7.widget.Toolbar style="@style/AppTheme.Toolbar"
+                    android:id="@+id/forget_pass_toolbar"
+                    android:background="@android:color/transparent"
+                    app:navigationIcon="?attr/homeAsUpIndicator"/>
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/forget_pass_check_phone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="40dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="2dp"
+                        android:padding="10dp"
+                        android:text="+86" />
+
+                    <com.flyco.roundview.RoundLinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="#ffffff"
+                        app:rv_strokeColor="#cccccc"
+                        app:rv_strokeWidth="@dimen/division_line"
+                        app:rv_cornerRadius="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="1.0">
+                        <com.xia.adgis.Utils.ClearEditText
+                            android:id="@+id/forget_pass_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#00000000"
+                            android:hint="请输入手机号码"
+                            android:textIsSelectable="true"
+                            android:maxLength="11"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:paddingStart="15dp"
+                            android:singleLine="true"
+                            android:textColor="#ff666666"
+                            android:textColorHint="#ffbdbdbd"
+                            android:textSize="18sp" />
+                    </com.flyco.roundview.RoundLinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="15dp">
+
+                    <com.flyco.roundview.RoundLinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:background="#ffffff"
+                        app:rv_strokeColor="#cccccc"
+                        app:rv_strokeWidth="@dimen/division_line"
+                        app:rv_cornerRadius="5dp"
+                        android:layout_marginEnd="15dp">
+                        <com.xia.adgis.Utils.ClearEditText
+                            android:id="@+id/forget_pass_code"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="请入验证码"
+                            android:background="#00000000"
+                            android:padding="10dp"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:textIsSelectable="true"
+                            android:maxLength="6"
+                            android:singleLine="true"
+                            android:textColor="#ff666666"
+                            android:textColorHint="#88b5b5b5"/>
+                    </com.flyco.roundview.RoundLinearLayout>
+                    <TextView
+                        android:id="@+id/forget_pass_send_code"
+                        android:layout_width="0dp"
+                        android:clickable="true"
+                        android:background="@drawable/main_button"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:textColor="@color/white"
+                        android:text="发送验证码" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:padding="8dp">
+                    <TextView
+                        android:id="@+id/confirm_code"
+                        android:layout_width="match_parent"
+                        android:clickable="true"
+                        android:background="@drawable/cancel_buttom"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="确认" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/forget_pass_change_pass"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:padding="8dp"
+                android:orientation="vertical">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/new_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="请输入新密码"
+                        android:inputType="textPassword"
+                        android:singleLine="true" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/new_password1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="请再次输入密码"
+                        android:inputType="textPassword"
+                        android:singleLine="true" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:padding="8dp">
+                    <TextView
+                        android:id="@+id/confirm_password"
+                        android:layout_width="match_parent"
+                        android:clickable="true"
+                        android:background="@drawable/cancel_buttom"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="确认" />
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</FrameLayout>

@@ -1,4 +1,4 @@
-package com.xia.adgis.Main.Bean;
+package com.xia.adgis.Utils.MySearchView.Bean;
 
 
 import com.xia.imagewatch.RolloutInfo;

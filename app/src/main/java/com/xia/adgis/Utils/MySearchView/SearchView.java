@@ -1,4 +1,4 @@
-package com.xia.adgis.Utils;
+package com.xia.adgis.Utils.MySearchView;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -79,7 +79,6 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
     /**
      * 设置搜索回调接口
      *
-     * @param listener 监听者
      */
     public void setSearchViewListener(SearchViewListener listener) {
         mListener = listener;
@@ -111,7 +110,7 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
                 llSearchEmpty.setVisibility(View.GONE);
                 showOrhide.setImageResource(R.drawable.ic_expand_more);
                 isShow = false;
-                notifyStartSearching(text);
+                notifyStartSearching();
             }
         });
 
@@ -130,7 +129,7 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
                     llSearchEmpty.setVisibility(GONE);
                     showOrhide.setImageResource(R.drawable.ic_expand_more);
                     isShow = false;
-                    notifyStartSearching(etInput.getText().toString());
+                    notifyStartSearching();
                 }
                 return true;
             }
@@ -139,9 +138,8 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
 
     /**
      * 通知监听者 进行搜索操作
-     * @param text
      */
-    private void notifyStartSearching(String text){
+    private void notifyStartSearching(){
         if (mListener != null) {
             mListener.onSearch(etInput.getText().toString());
         }
@@ -220,6 +218,7 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
                     while (cursor.moveToNext()){
                         mHintAdapter.add(cursor.getString(cursor.getColumnIndex("name")));
                     }
+                    cursor.close();
                 }catch (Exception e){
                     Toast.makeText(mContext,e.getMessage(),Toast.LENGTH_SHORT).show();
                 }

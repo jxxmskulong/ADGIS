@@ -6,14 +6,17 @@ import android.content.Context;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bottomdialog.BaseBottomDialog;
 import com.xia.adgis.R;
 import com.xia.adgis.Register.Bean.User;
+import com.xia.adgis.Register.check.PhoneCheck;
+import com.xia.adgis.Utils.ClearEditText;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -21,16 +24,22 @@ import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /**
+ *
  * Created by xiati on 2018/2/23.
  */
 
 public class BindPhoneDialog extends BaseBottomDialog {
 
     //各类控件
+    @BindView(R.id.cancel)
     TextView Cancel;
+    @BindView(R.id.confirm)
     TextView Confirm;
-    EditText Phone;
-    EditText Code;
+    @BindView(R.id.change_number)
+    ClearEditText Phone;
+    @BindView(R.id.change_code)
+    ClearEditText Code;
+    @BindView(R.id.change_send)
     TextView Send;
     ProgressDialog progress;
     @Override
@@ -40,11 +49,7 @@ public class BindPhoneDialog extends BaseBottomDialog {
 
     @Override
     public void bindView(View v) {
-        Cancel = (TextView) v.findViewById(R.id.cancel);
-        Confirm = (TextView) v.findViewById(R.id.confirm);
-        Phone = (EditText) v.findViewById(R.id.change_number);
-        Code = (EditText) v.findViewById(R.id.change_code);
-        Send = (TextView) v.findViewById(R.id.change_send);
+        ButterKnife.bind(this,v);
         progress = new ProgressDialog(getActivity());
         progress.setMessage("正在验证短信验证码");
         progress.setCanceledOnTouchOutside(false);
@@ -73,25 +78,28 @@ public class BindPhoneDialog extends BaseBottomDialog {
     //发送短信验证码
     private void requestSMSCode() {
         String phone = Phone.getText().toString();
-        if(!TextUtils.isEmpty(phone)){
-            final MyCountTimer timer = new MyCountTimer(30000,1000);
+        if(TextUtils.isEmpty(phone)){
+            Toast.makeText(getActivity(), "电话输入为空", Toast.LENGTH_SHORT).show();
+        } else if (!phone.matches("[\\d]{11}")) {
+            Toast.makeText(getActivity(), "手机号码必须为11位", Toast.LENGTH_SHORT).show();
+        } else if(!PhoneCheck.checkNumber(phone.substring(0,3))){
+            Toast.makeText(getActivity(), "号码非法!", Toast.LENGTH_SHORT).show();
+        } else {
+            final MyCountTimer timer = new MyCountTimer(60000, 1000);
             timer.start();
-            BmobSMS.requestSMSCode(phone, "默认模板", new QueryListener<Integer>() {
+            BmobSMS.requestSMSCode(phone, "ADGIS", new QueryListener<Integer>() {
                 @Override
                 public void done(Integer integer, BmobException e) {
-                    if (e == null){
-                        //Toast.makeText(getActivity(), "验证码发送成功", Toast.LENGTH_SHORT).show();
-                        Send.setText("发送成功");
+                    if (e == null) {
+                        Toast.makeText(getActivity(), "验证码发送成功", Toast.LENGTH_SHORT).show();
                         Send.setEnabled(false);
-                    }else{
+                    } else {
                         Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                         timer.cancel();
                         Send.setEnabled(true);
                     }
                 }
             });
-        }else{
-            Toast.makeText(getActivity(), "电话输入为空", Toast.LENGTH_SHORT).show();
         }
     }
     //自定义倒计时
@@ -117,14 +125,25 @@ public class BindPhoneDialog extends BaseBottomDialog {
     private void verifyOrBind(){
         final String phone = Phone.getText().toString();
         String code = Code.getText().toString();
-        if(TextUtils.isEmpty(phone)){
+        if (TextUtils.isEmpty(phone)) {
             Toast.makeText(getActivity(), "手机号码不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (!phone.matches("[\\d]{11}")) {
+            Toast.makeText(getActivity(), "手机号码必须为11位", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(!PhoneCheck.checkNumber(phone.substring(0,3))){
+            Toast.makeText(getActivity(), "号码非法!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        if(TextUtils.isEmpty(code)){
+        if (TextUtils.isEmpty(code)) {
             Toast.makeText(getActivity(), "验证码不能为空", Toast.LENGTH_SHORT).show();
             return;
+        }
+        if (!code.matches("[\\d]{6}")){
+            Toast.makeText(getActivity(), "验证码必须为6位", Toast.LENGTH_SHORT).show();
         }
 
         progress.show();

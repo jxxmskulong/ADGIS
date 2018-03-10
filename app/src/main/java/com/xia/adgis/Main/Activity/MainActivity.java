@@ -3,12 +3,15 @@ package com.xia.adgis.Main.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -20,6 +23,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.widget.Toolbar;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -57,6 +61,7 @@ import com.example.swipeback.SwipeBackActivityImpl;
 import com.google.gson.Gson;
 import com.xia.adgis.Login.LoginActivity;
 import com.xia.adgis.Main.Bean.AD;
+import com.xia.adgis.Main.Tool.StatusBarUtil;
 import com.xia.adgis.R;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
@@ -79,6 +84,7 @@ import cn.bmob.v3.listener.FetchUserInfoListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 import rx.Subscriber;
 
+@SuppressWarnings("unchecked")
 public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarkerClickListener,PopupWindow.OnDismissListener{
 
     private static final int UI_ANIMATION_DELAY = 3;
@@ -114,8 +120,8 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
     @BindView(R.id.imageView)
     CircleImageView mCircleImageView;
     //我的位置
-    @BindView(R.id.location)
-    ImageView mLocation;
+    @BindView(R.id.preferences)
+    ImageView mPreferences;
     //搜索
     @BindView(R.id.search)
     ImageView mSearch;
@@ -133,7 +139,7 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
     private int tempMarkerId = 0;
     private ArrayList<LatLng> tempLatLng = new ArrayList<>();
     private ArrayList<Marker> tempMarker = new ArrayList<>();
-    //侧滑相关
+    //左侧滑相关
     @BindView(R.id.right)
     FrameLayout right;
     @BindView(R.id.nav_view)
@@ -141,10 +147,15 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
     private boolean isDrawer = false;
-    //侧滑内部控件
+    //左侧侧滑内部控件
     TextView username;
     TextView usermail;
     CircleImageView icon;
+    //右侧滑栏
+    @BindView(R.id.right_nav_view)
+    NavigationView right_nav_view;
+    //右侧滑内部控件
+    Toolbar right_toolbar;
     //弹出的popwindow
     private PopupWindow popupWindow;
     private int navigationHeight;   //弹窗弹出的位置
@@ -168,6 +179,8 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
     private boolean mVisible;
     //进度显示
     ProgressDialog progressDialog;
+    //设置首选项
+    SharedPreferences settingPreferences;
     //活动扩充至状态栏部分
     //实现状态栏图标和文字颜色为暗色
     int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -243,13 +256,17 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
         //地图设置
         initMapSetting();
         mMapView.onCreate(savedInstanceState);
-
+        //载入设置首选项
+        settingPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        LoadSettingPreferences();
         //初始化底部导航栏
         initBottomNavigationBar();
         //右上角弹出菜单
         initTopRightMenu();
-        //初始化侧滑栏
-        initDrawerLayout();
+        //初始化左侧滑栏
+        initLeftDrawerLayout();
+        //初始化右侧滑栏
+        initRightDrawerLayout();
         //加载数据
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -270,10 +287,16 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
                 .subscribe(new Subscriber<List<AD>>() {
                     @Override
                     public void onCompleted() {
-                        //处理逻辑(定位)
-                        if (mAMapLocationClient != null) {
-                            mAMapLocationClient.startLocation();
-                        }
+                        //加载顶部导航栏的头像
+                        Glide.with(MainActivity.this)
+                                .load(user.getUserIcon())
+                                .into(new GlideDrawableImageViewTarget(mCircleImageView){
+                                    @Override
+                                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                                        super.onResourceReady(resource, animation);
+                                        progressDialog.dismiss();
+                                    }
+                                });
                     }
 
                     @Override
@@ -285,16 +308,8 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
                     public void onNext(List<AD> ads) {
                         bmobData = ads;
                         addMarksToMap(ads);
-                        //加载顶部导航栏的头像
-                        Glide.with(MainActivity.this)
-                                .load(user.getUserIcon())
-                                .into(new GlideDrawableImageViewTarget(mCircleImageView){
-                                    @Override
-                                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                                        super.onResourceReady(resource, animation);
-                                        progressDialog.dismiss();
-                                    }
-                                });
+                        boolean isMemory = settingPreferences.getBoolean("preference_history",true);
+                        isMemoryLocation(isMemory);
                     }
                 });
         //底部导航栏图片资源
@@ -307,8 +322,17 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
         });
 
         //弹窗弹出位置
-        int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
-        navigationHeight = getResources().getDimensionPixelSize(resourceId);
+        //int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+        //navigationHeight = getResources().getDimensionPixelSize(resourceId);
+    }
+
+    //载入设置
+    private void LoadSettingPreferences(){
+        String Pre_MAP_TYPE = settingPreferences.getString("preference_chose_map","1");
+        boolean isRound = settingPreferences.getBoolean("preference_traffic",false);
+        int MAP_TYPE = Integer.valueOf(Pre_MAP_TYPE);
+        mAMap.setMapType(MAP_TYPE);
+        mUiSettings.setRotateGesturesEnabled(isRound);
     }
 
     //沉浸式工具栏
@@ -326,33 +350,32 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
             mAMap = mMapView.getMap();
             mAMap.showIndoorMap(true);
             mUiSettings = mAMap.getUiSettings();
-            /*此处为系统自定义的定位
-            myLocationStyle = new MyLocationStyle();
+            //此处为系统自定义的定位
+            /*myLocationStyle = new MyLocationStyle();
             myLocationStyle.strokeColor(Color.argb(0, 0, 0, 0));// 设置圆形的边框颜色
             myLocationStyle.radiusFillColor(Color.argb(0, 0, 0, 0));// 设置圆形的填充颜色
             myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.drawable.gps_1));
             mAMap.setMyLocationStyle(myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_SHOW));*/
             initLocation();
+            //mAMap.setTrafficEnabled(true);
             mAMap.setOnMarkerClickListener(this);
         }
         // 设置用户交互以手动显示或隐藏系统UI。
         mAMap.setOnMapClickListener(new AMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                //隐藏infoWindows
-                if(tempMarker.size() == 0) {
-                    //没有可见的marker
+                if(settingPreferences.getBoolean("preference_hide_ui",true)) {
                     toggle();
                 }else {
                     deleteInfoWindows(tempMarker);
-                    toggle();
                 }
             }
         });
         mAMap.setOnMapLongClickListener(new AMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
-                toggle();
+                //隐藏infoWindows
+                deleteInfoWindows(tempMarker);
             }
         });
         //地图基本的UI设置
@@ -365,8 +388,6 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
         //mAMap.setMyLocationEnabled(true);
         //缩放按钮不显示
         mUiSettings.setZoomControlsEnabled(false);
-        //禁止旋转手势
-        mUiSettings.setRotateGesturesEnabled(false);
     }
 
     //初始化定位相关
@@ -661,12 +682,10 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
 
     //右上角菜单
     private void initTopRightMenu(){
-        mLocation.setOnClickListener(new View.OnClickListener() {
+        mPreferences.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mAMapLocationClient != null) {
-                    mAMapLocationClient.startLocation();
-                }
+                drawer.openDrawer(Gravity.END);
             }
         });
         mSearch.setOnClickListener(new View.OnClickListener() {
@@ -679,16 +698,17 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
         });
     }
 
-    //侧滑栏
-    private void initDrawerLayout(){
+    //左侧滑栏
+    private void initLeftDrawerLayout(){
 
         left.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(android.view.MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull android.view.MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.All_ADs:
                         //Intent intent = new Intent(MainActivity.this,AllADsActivity.class);
                         //startActivity(intent);
+                        //startActivity(new Intent(MainActivity.this,ForgetPassWordActivity.class));
                         break;
                     case R.id.setting:
                         Intent intent = new Intent(MainActivity.this,SettingActivity.class);
@@ -696,22 +716,11 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
                         overridePendingTransition(R.anim.in,R.anim.out);
                         break;
                     case R.id.aboutUs_menu:
+
                         break;
-                    case R.id.normal_map:
-                        mAMap.setMapType(AMap.MAP_TYPE_NORMAL);
-                        //mImageView.setImageResource(R.drawable.ic_more_horiz_black);
-                        break;
-                    case R.id.satellite_map:
-                        mAMap.setMapType(AMap.MAP_TYPE_SATELLITE);
-                        //mImageView.setImageResource(R.drawable.ic_more_horiz_white);
-                        break;
-                    case R.id.night_map:
-                        mAMap.setMapType(AMap.MAP_TYPE_NIGHT);
-                        //mImageView.setImageResource(R.drawable.ic_more_horiz_white);
-                        break;
-                    case R.id.bus_map:
-                        mAMap.setMapType(AMap.MAP_TYPE_BUS);
-                        //mImageView.setImageResource(R.drawable.ic_more_horiz_black);
+                    case R.id.exit:
+                        finish();
+                        overridePendingTransition(R.anim.in_1,R.anim.out_1);
                         break;
                     default:
                 }
@@ -738,6 +747,7 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
             @Override
             public void onDrawerClosed(View drawerView) {
                 isDrawer = false;
+                LoadSettingPreferences();
             }
 
             @Override
@@ -766,6 +776,39 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
             }
         });
     }
+
+    //右侧滑栏
+    private void initRightDrawerLayout(){
+        right_nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull android.view.MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.my_location:
+                        if (mAMapLocationClient != null) {
+                            mAMapLocationClient.startLocation();
+                        }
+                        break;
+                    default:
+                }
+                drawer.closeDrawer(Gravity.END);
+                return false;
+            }
+        });
+        //toolbar处理
+        View header = right_nav_view.getHeaderView(0);
+        right_toolbar = (Toolbar) header.findViewById(R.id.main_setting_toolbar);
+        right_toolbar.setTitle("偏好设置");
+        StatusBarUtil.setPaddingSmart(this,right_toolbar);
+        right_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawer.closeDrawer(Gravity.END);
+            }
+        });
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED,Gravity.END);
+    }
+
+    //pop弹出函数
     private void openPopupWindow() {
         //防止重复按按钮
         if (popupWindow != null && popupWindow.isShowing()) {
@@ -904,10 +947,33 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
     protected void onDestroy() {
         super.onDestroy();
         mMapView.onDestroy();
-        tempMarkerId = 0;
+        isSaveTempMarkId(tempMarkerId ,settingPreferences.getBoolean("preference_history",false));
         //退出界面的时候停止定位
         if (mAMapLocationClient != null) {
             mAMapLocationClient.stopLocation();
+        }
+    }
+
+    //存储退出时的mark序号
+    private void isSaveTempMarkId(int MarkerId, boolean isMenory){
+        SharedPreferences.Editor editor = getSharedPreferences("map_data", MODE_PRIVATE).edit();
+        if(isMenory) {
+            editor.putInt("tempMarkerId", MarkerId);
+        }else{
+            editor.clear();
+        }
+        editor.apply();
+    }
+
+    //是否记忆了退出位置
+    private void isMemoryLocation(boolean isMemory){
+        if(isMemory) {
+            mAMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
+                    tempLatLng.get(getSharedPreferences("map_data", MODE_PRIVATE).
+                            getInt("tempMarkerId", 0)), 17, 0, 0)), 500, null);
+        }else{
+            mAMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
+                    tempLatLng.get(0), 17, 0, 0)), 500, null);
         }
     }
 
@@ -916,12 +982,14 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }else if(popupWindow != null && popupWindow.isShowing()){
+        } else if(drawer.isDrawerOpen(Gravity.END)){
+            drawer.closeDrawer(Gravity.END);
+        } else if(popupWindow != null && popupWindow.isShowing()){
             popupWindow.dismiss();
-        }else if ((System.currentTimeMillis() - mExitTime) > 2000){
+        } else if ((System.currentTimeMillis() - mExitTime) > 2000){
             Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
             mExitTime = System.currentTimeMillis();
-        }else {
+        } else {
             super.onBackPressed();
         }
     }
@@ -932,6 +1000,7 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
         setSwipeBackEnable(false);
     }
 
+    //每次进入时都会抓取网上最新缓存
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -1018,9 +1087,10 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
         }
         return temp;
     }
+
     //这是最底层activity,不需要背景透明
-    /*@Override
+    @Override
     public boolean isTransparent() {
         return false;
-    }*/
+    }
 }

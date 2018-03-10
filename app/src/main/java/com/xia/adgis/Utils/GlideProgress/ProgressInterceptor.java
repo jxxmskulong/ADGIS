@@ -1,4 +1,4 @@
-package com.xia.adgis.GlideProgress;
+package com.xia.adgis.Utils.GlideProgress;
 
 import java.io.IOException;
 import java.util.HashMap;

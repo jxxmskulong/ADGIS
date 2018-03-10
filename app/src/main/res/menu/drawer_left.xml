@@ -15,27 +15,11 @@
             android:id="@+id/aboutUs_menu"
             android:icon="@drawable/ic_about_us"
             android:title="关于我们" />
-    </group>
 
-    <item android:title="地图模式切换">
-        <menu android:checkableBehavior="single">
-            <item
-                android:id="@+id/normal_map"
-                android:icon="@drawable/map_normal"
-                android:title="普通地图" />
-            <item
-                android:id="@+id/satellite_map"
-                android:icon="@drawable/map_satellite"
-                android:title="卫星地图" />
-            <item
-                android:id="@+id/night_map"
-                android:icon="@drawable/map_night"
-                android:title="夜间地图" />
-            <item
-                android:id="@+id/bus_map"
-                android:icon="@drawable/map_bus"
-                android:title="公交地图" />
-        </menu>
-    </item>
+        <item
+            android:id="@+id/exit"
+            android:icon="@drawable/ic_power_down"
+            android:title="退出" />
+    </group>
 
 </menu>

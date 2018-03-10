@@ -1,4 +1,4 @@
-package com.xia.adgis.GlideProgress;
+package com.xia.adgis.Utils.GlideProgress;
 
 /**
  * Created by xiati on 2018/2/10.

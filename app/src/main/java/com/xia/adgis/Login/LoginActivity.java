@@ -36,6 +36,7 @@ import com.xia.adgis.Main.Activity.ForgetPassWordActivity;
 import com.xia.adgis.Main.Activity.MainActivity;
 import com.xia.adgis.R;
 import com.xia.adgis.Register.RegisterActivity;
+import com.xia.adgis.Utils.ClearAutoCompleteTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    public static AutoCompleteTextView mUsernameView;
+    public static ClearAutoCompleteTextView mUsernameView;
     public static EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -64,8 +65,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // 设置登录表单。
-        mUsernameView = (AutoCompleteTextView) findViewById(R.id.email);
+        // 设置登录表单
+        mUsernameView = (ClearAutoCompleteTextView) findViewById(R.id.email);
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -202,10 +203,8 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * 显示进度UI并隐藏登录表单。
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
         //在Honeycomb MR2上，我们有ViewPropertyAnimator API，可以非常简单的动画。 如果可用，请使用这些API淡入进度微调器。
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
@@ -225,11 +224,6 @@ public class LoginActivity extends AppCompatActivity {
                     mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
                 }
             });
-        } else {
-            // ViewPropertyAnimator API不可用，所以只需显示和隐藏相关的UI组件。
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
     }
 
     //下拉列表显示历史登陆用户
@@ -304,10 +298,10 @@ public class LoginActivity extends AppCompatActivity {
                             edit.putBoolean("isCheck", true);
                             edit.putString("name", mEmail);
                             edit.putString("pwd", mPassword);
-                            edit.commit();
+                            edit.apply();
                         } else {
                             edit.clear();
-                            edit.commit();
+                            edit.apply();
                         }
                         Toast.makeText(getBaseContext(), bmobUser.getUsername()+"用户登录成功", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);

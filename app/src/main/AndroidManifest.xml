@@ -43,7 +43,7 @@
             android:value="46cd8da4d28bf23bfadc0e73978418e2" />
         <!-- 使用okhttp替换Glide底部的加载方法 -->
         <meta-data
-            android:name="com.xia.adgis.GlideProgress.ProgressGlideModule"
+            android:name="com.xia.adgis.Utils.GlideProgress.ProgressGlideModule"
             android:value="GlideModule" />
         <!-- 开始的登陆页 -->
         <activity
@@ -100,7 +100,10 @@
         <activity
             android:name=".DragPhotoActivity"
             android:theme="@style/translucent" />
-        <activity android:name=".Main.Activity.ForgetPassWordActivity"></activity>
+        <activity
+            android:name=".Main.Activity.ForgetPassWordActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
+        <activity android:name=".Main.Activity.ApplicationMessageActivity"></activity>
     </application>
 
 </manifest>

@@ -70,7 +70,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="2dp"
             android:layout_weight="1.0">
-        <EditText
+        <com.xia.adgis.Utils.ClearEditText
             android:id="@+id/change_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
             app:rv_strokeWidth="@dimen/division_line"
             app:rv_cornerRadius="5dp"
             android:layout_marginEnd="15dp">
-        <EditText
+        <com.xia.adgis.Utils.ClearEditText
             android:id="@+id/change_code"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

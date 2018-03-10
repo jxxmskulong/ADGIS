@@ -142,9 +142,6 @@ public class EditUserActivity extends SwipeBackActivityImpl implements View.OnCl
         editSex.setOnClickListener(this);
         editBirthday.setOnClickListener(this);
         editPhone.setOnClickListener(this);
-        //弹窗弹出位置
-        int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
-        navigationHeight = getResources().getDimensionPixelSize(resourceId);
         //得到文件存储路径
         String filename = "cropImage.jpeg";
         //目标路径
@@ -701,6 +698,7 @@ public class EditUserActivity extends SwipeBackActivityImpl implements View.OnCl
                             newUser.setSex(sex);
                             newUser.setBirthday(birthday);
                             newUser.setMobilePhoneNumber(phone);
+                            newUser.setEmailVerified(true);
                             if(!email.equals(user.getEmail())){
                                 newUser.setEmail(email);
                             }

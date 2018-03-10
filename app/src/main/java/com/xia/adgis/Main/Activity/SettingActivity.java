@@ -40,6 +40,8 @@ public class SettingActivity extends AppCompatActivity {
     RelativeLayout clearCaChe;
     @BindView(R.id.show_CaChe)
     TextView showCaChe;
+    @BindView(R.id.appMessage)
+    RelativeLayout appMessage;
     @BindView(R.id.log_out)
     Button logOut;
     //本地用户
@@ -58,6 +60,8 @@ public class SettingActivity extends AppCompatActivity {
         initToolbar();
         //显示缓存大小
         initCaCheSize();
+        //应用信息
+        showAppMessage();
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,8 +96,6 @@ public class SettingActivity extends AppCompatActivity {
         }
         //以后用来设置用户名
         collapsingToolbarLayout.setTitle("设置");
-        //用户背景图片
-        Glide.with(this).load(R.drawable.userback).into(setting_ImageView);
     }
     private void initCaCheSize(){
 
@@ -165,6 +167,16 @@ public class SettingActivity extends AppCompatActivity {
                 file.delete();
             }
         }
+    }
+
+    private void showAppMessage(){
+        appMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SettingActivity.this,ApplicationMessageActivity.class));
+                overridePendingTransition(R.anim.in,R.anim.out);
+            }
+        });
     }
 
     @Override

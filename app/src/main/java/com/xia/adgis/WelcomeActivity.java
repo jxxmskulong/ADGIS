@@ -26,7 +26,7 @@ import cn.bmob.v3.BmobUser;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    private static final int LOAD_DISPLAY_TIME = 2000;
+    private static final int LOAD_DISPLAY_TIME = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

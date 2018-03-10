@@ -1,4 +1,4 @@
-package com.xia.adgis.GlideProgress;
+package com.xia.adgis.Utils.GlideProgress;
 
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.data.DataFetcher;
