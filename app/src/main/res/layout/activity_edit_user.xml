@@ -9,7 +9,10 @@
     <android.support.v7.widget.Toolbar
         style="@style/AppTheme.Toolbar"
         android:id="@+id/toolbar_edit" />
-
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
+    android:id="@+id/huadong"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -251,16 +254,10 @@
                     android:textSize="15sp" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="#a5d1a5" />
-
             <RelativeLayout
+                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:background="#ffffff"
                 android:orientation="horizontal">
 
@@ -289,12 +286,14 @@
                     android:id="@+id/edit_Textcount_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/edit_motto"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="5dp"
+                    android:layout_margin="8dp"
                     android:text="20" />
             </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

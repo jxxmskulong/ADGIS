@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    xmlns:wave="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.xia.adgis.Login.LoginActivity">
 
     <!-- Login progress -->
@@ -21,40 +21,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <FrameLayout
+            <com.xia.adgis.Utils.MultiWaveHeader.MultiWaveHeader
+                android:id="@+id/waves"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.xia.adgis.Utils.WaveViewBySinCos
-                    android:layout_width="match_parent"
-                    android:layout_height="125dp"
-                    wave:waveAmplitude="15dp"
-                    wave:waveFillType="top"
-                    wave:waveSpeed="1"
-                    wave:waveStart="true"
-                    wave:waveColor="#cc303F9F"
-                    wave:waveStartPeriod="1"
-                    wave:waveType="sin" />
-
-                <com.xia.adgis.Utils.WaveViewBySinCos
-                    android:layout_width="match_parent"
-                    android:layout_height="125dp"
-                    wave:waveAmplitude="15dp"
-                    wave:waveFillType="top"
-                    wave:waveColor="#cc303F9F"
-                    wave:waveSpeed="1"
-                    wave:waveStart="true"
-                    wave:waveStartPeriod="0.5"
-                    wave:waveType="sin" />
-            </FrameLayout>
+                android:layout_height="150dp"
+                app:mwhAlphaColor="0.45"
+                android:tag="
+                70,25,1.4,1.4,-26
+                100,5,1.4,1.2,15
+                420,0,1.15,1,-10
+                520,10,1.7,1.5,20
+                220,0,1,1,-15"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="-90dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
@@ -63,11 +50,9 @@
 
             <ImageView
                 android:id="@+id/header"
-                android:layout_marginTop="50dp"
                 android:layout_gravity="center"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerInParent="true"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 android:src="@drawable/tubiao" />
 
             <TextView
@@ -161,6 +146,6 @@
                     android:layout_alignParentStart="true" />
             </RelativeLayout>
         </LinearLayout>
-        </FrameLayout>
+        </LinearLayout>
     </ScrollView>
 </FrameLayout>

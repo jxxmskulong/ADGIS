@@ -95,7 +95,7 @@ public class ADsDetailActivity extends AppCompatActivity {
             }
         });
         //沉浸模式
-        StatusBarUtil.immersive(this);
+        StatusBarUtil.immersive(this, true);
         StatusBarUtil.setPaddingSmart(this,toolbar);
         StatusBarUtil.setPaddingSmart(this,adsDetail);
         //开始不透明

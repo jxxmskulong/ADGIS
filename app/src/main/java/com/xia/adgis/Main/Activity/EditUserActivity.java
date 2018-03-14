@@ -48,6 +48,7 @@ import com.lljjcoder.bean.DistrictBean;
 import com.lljjcoder.bean.ProvinceBean;
 import com.lljjcoder.citywheel.CityConfig;
 import com.lljjcoder.style.citypickerview.CityPickerView;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xia.adgis.App;
 import com.xia.adgis.CropActivity;
 import com.xia.adgis.Main.Tool.BindPhoneDialog;
@@ -96,6 +97,8 @@ public class EditUserActivity extends SwipeBackActivityImpl implements View.OnCl
     TextView editCount;
     @BindView(R.id.edit_photo_image)
     CircleImageView editPhotoImage;
+    @BindView(R.id.huadong)
+    SmartRefreshLayout smartRefreshLayout;
     //加载对话框
     ProgressDialog loading;
     //本地用户
@@ -166,7 +169,8 @@ public class EditUserActivity extends SwipeBackActivityImpl implements View.OnCl
         initSexPicker();
         //预先加载时间信息
         initBirthdayPicker();
-
+        smartRefreshLayout.setEnableAutoLoadMore(false);
+        smartRefreshLayout.setEnableRefresh(false);
     }
 
     @Override
@@ -235,7 +239,7 @@ public class EditUserActivity extends SwipeBackActivityImpl implements View.OnCl
                 });
 
         //进入后个人介绍剩余字数
-        String temp = 20 - user.getMotto().length() + "";
+        String temp = 20 - editMotte.getText().toString().length() + "0";
         editCount.setText(temp);
         //个人介绍的文字限制
         editMotte.addTextChangedListener(new TextWatcher() {

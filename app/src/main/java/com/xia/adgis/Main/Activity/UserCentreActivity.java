@@ -90,7 +90,7 @@ public class UserCentreActivity extends SwipeBackActivityImpl {
         //获取本地账户
         user = BmobUser.getCurrentUser(User.class);
         //状态栏透明和间距处理
-        StatusBarUtil.immersive(this);
+        StatusBarUtil.immersive(this,true);
         StatusBarUtil.setPaddingSmart(this, toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -213,6 +213,8 @@ public class UserCentreActivity extends SwipeBackActivityImpl {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
+                Intent exit = new Intent();
+                setResult(RESULT_OK, exit);
                 onBackPressed();
                 break;
             case R.id.user_edit:
@@ -227,6 +229,13 @@ public class UserCentreActivity extends SwipeBackActivityImpl {
     protected void onDestroy() {
         super.onDestroy();
         Glide.get(this).clearMemory();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
     }
 
     @Override

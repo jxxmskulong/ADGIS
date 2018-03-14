@@ -84,6 +84,7 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
         mListener = listener;
     }
 
+
     public SearchView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;

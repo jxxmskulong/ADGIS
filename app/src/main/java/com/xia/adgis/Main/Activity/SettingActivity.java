@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.xia.adgis.App;
+import com.xia.adgis.Main.Tool.StatusBarUtil;
 import com.xia.adgis.R;
 import com.xia.adgis.Register.Bean.User;
 
@@ -55,6 +56,8 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
+        StatusBarUtil.immersive(this, false);
+        StatusBarUtil.setPaddingSmart(this, setting_toolbar);
         user = BmobUser.getCurrentUser(User.class);
         //初始化toolbar
         initToolbar();

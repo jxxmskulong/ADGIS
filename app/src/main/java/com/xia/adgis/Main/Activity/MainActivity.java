@@ -1,11 +1,11 @@
 package com.xia.adgis.Main.Activity;
 
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -16,11 +16,12 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.Toolbar;
@@ -61,6 +62,7 @@ import com.example.swipeback.SwipeBackActivityImpl;
 import com.google.gson.Gson;
 import com.xia.adgis.Login.LoginActivity;
 import com.xia.adgis.Main.Bean.AD;
+import com.xia.adgis.Main.Fragment.SettingFragment;
 import com.xia.adgis.Main.Tool.StatusBarUtil;
 import com.xia.adgis.R;
 import com.amap.api.maps.AMap;
@@ -86,10 +88,10 @@ import rx.Subscriber;
 
 @SuppressWarnings("unchecked")
 public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarkerClickListener,PopupWindow.OnDismissListener{
-
-    private static final int UI_ANIMATION_DELAY = 3;
+    private static final int UI_ANIMATION_DELAY = 5;
     private static final int SEARCH = 1;
     private static final int SETTING = 2;
+    private static final int USER_CENTRE = 3;
     //需点击隐藏的UI控件
     @BindView(R.id.fullscreen_content_controls)
     View mControlsView;
@@ -181,32 +183,16 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
     ProgressDialog progressDialog;
     //设置首选项
     SharedPreferences settingPreferences;
-    //活动扩充至状态栏部分
-    //实现状态栏图标和文字颜色为暗色
-    int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                |View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                |View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
     private long mExitTime;
     /**
      * 以下全部都是隐藏界面的逻辑
      */
     private final Handler mHideHandler = new Handler();
 
-    private final Runnable mHidePart2Runnable = new Runnable() {
-        @Override
-        public void run() {
-            mMapView.setSystemUiVisibility(option);
-        }
-    };
-
     private final Runnable mShowPart2Runnable = new Runnable() {
         @Override
         public void run() {
-            // Delayed display of UI elements
-            ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.show();
-            }
+
             mControlsView.setVisibility(View.VISIBLE);
             mToolBar.setVisibility(View.VISIBLE);
         }
@@ -224,22 +210,14 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
     }
     //隐藏逻辑
     private void hide() {
-        // Hide UI first
         mControlsView.setVisibility(View.GONE);
         mToolBar.setVisibility(View.GONE);
         mVisible = false;
-        // 安排一个可运行的程序，以便在延迟后删除状态和导航栏
         mHideHandler.removeCallbacks(mShowPart2Runnable);
-        mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
     }
     //显示逻辑
     private void show() {
-        // Show the system bar
-        mMapView.setSystemUiVisibility(option);
         mVisible = true;
-
-        // 安排一个可运行的延迟之后显示UI元素
-        mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
     }
 
@@ -252,7 +230,7 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
         user = BmobUser.getCurrentUser(User.class);
         mVisible = true;
         //沉浸式任务栏
-        initImmersiveStatusBar();
+        StatusBarUtil.immersive(this, true);
         //地图设置
         initMapSetting();
         mMapView.onCreate(savedInstanceState);
@@ -335,13 +313,6 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
         mUiSettings.setRotateGesturesEnabled(isRound);
     }
 
-    //沉浸式工具栏
-    private void initImmersiveStatusBar(){
-        View decorView = getWindow().getDecorView();
-
-        decorView.setSystemUiVisibility(option);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
-    }
 
     //初始化并设置地图
     private void initMapSetting(){
@@ -741,6 +712,7 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
 
             @Override
             public void onDrawerOpened(View drawerView) {
+                SettingFragment setting = new SettingFragment();
 
             }
 
@@ -768,7 +740,7 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,UserCentreActivity.class);
-                ActivityCompat.startActivity(MainActivity.this,intent,
+                ActivityCompat.startActivityForResult(MainActivity.this, intent, USER_CENTRE,
                         ActivityOptionsCompat.makeSceneTransitionAnimation(
                                 MainActivity.this,
                                 new Pair<>(view, "icon"))
@@ -1004,34 +976,6 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
     @Override
     protected void onRestart() {
         super.onRestart();
-        BmobUser.fetchUserJsonInfo(new FetchUserInfoListener<String>() {
-            @Override
-            public void done(String s, BmobException e) {
-                if (e == null) {
-                    Gson gson = new Gson();
-                    User temp = gson.fromJson(s, User.class);
-                    Glide.with(MainActivity.this).load(temp.getUserIcon()).into(icon);
-                    Glide.with(MainActivity.this)
-                            .load(temp.getUserIcon())
-                            .into(new GlideDrawableImageViewTarget(mCircleImageView) {
-                                @Override
-                                public void onLoadStarted(Drawable placeholder) {
-                                    super.onLoadStarted(placeholder);
-                                    progressDialog.show();
-                                }
-
-                                @Override
-                                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                                    super.onResourceReady(resource, animation);
-                                    progressDialog.dismiss();
-                                }
-                            });
-                    //用户邮箱
-                    usermail.setText(temp.getEmail());
-                }
-
-            }
-        });
     }
 
     @Override
@@ -1061,6 +1005,40 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
                     }else{
                         drawer.closeDrawer(Gravity.START);
                     }
+                    //设置界面载入设置
+                    LoadSettingPreferences();
+                }
+                break;
+            case USER_CENTRE :
+                if(resultCode == RESULT_OK){
+                    BmobUser.fetchUserJsonInfo(new FetchUserInfoListener<String>() {
+                        @Override
+                        public void done(String s, BmobException e) {
+                            if (e == null) {
+                                Gson gson = new Gson();
+                                User temp = gson.fromJson(s, User.class);
+                                Glide.with(MainActivity.this).load(temp.getUserIcon()).into(icon);
+                                Glide.with(MainActivity.this)
+                                        .load(temp.getUserIcon())
+                                        .into(new GlideDrawableImageViewTarget(mCircleImageView) {
+                                            @Override
+                                            public void onLoadStarted(Drawable placeholder) {
+                                                super.onLoadStarted(placeholder);
+                                                progressDialog.show();
+                                            }
+
+                                            @Override
+                                            public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                                                super.onResourceReady(resource, animation);
+                                                progressDialog.dismiss();
+                                            }
+                                        });
+                                //用户邮箱
+                                usermail.setText(temp.getEmail());
+                            }
+
+                        }
+                    });
                 }
         }
     }
@@ -1087,7 +1065,6 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
         }
         return temp;
     }
-
     //这是最底层activity,不需要背景透明
     @Override
     public boolean isTransparent() {

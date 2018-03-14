@@ -88,16 +88,13 @@ public class SearchActivity extends SwipeBackActivityImpl implements SearchView.
      */
     private static int hintSize = DEFAULT_HINT_SIZE;
 
-    int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            |View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            |View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        getWindow().getDecorView().setSystemUiVisibility(option);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        StatusBarUtil.immersive(this, true);
         initData();
         initViews();
         SearchView.isShow = false;
