@@ -75,7 +75,8 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginTop="2dp"
                         android:padding="10dp"
-                        android:text="+86" />
+                        android:text="+86"
+                        tools:ignore="HardcodedText"/>
 
                     <com.flyco.roundview.RoundLinearLayout
                         android:layout_width="0dp"
@@ -100,10 +101,11 @@
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
                             android:paddingStart="15dp"
-                            android:singleLine="true"
+                            android:maxLines="1"
                             android:textColor="#ff666666"
                             android:textColorHint="#ffbdbdbd"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            tools:ignore="HardcodedText"/>
                     </com.flyco.roundview.RoundLinearLayout>
                 </LinearLayout>
 
@@ -135,9 +137,10 @@
                             android:inputType="number"
                             android:textIsSelectable="true"
                             android:maxLength="6"
-                            android:singleLine="true"
+                            android:maxLines="1"
                             android:textColor="#ff666666"
-                            android:textColorHint="#88b5b5b5"/>
+                            android:textColorHint="#88b5b5b5"
+                            tools:ignore="HardcodedText"/>
                     </com.flyco.roundview.RoundLinearLayout>
                     <TextView
                         android:id="@+id/forget_pass_send_code"
@@ -149,7 +152,8 @@
                         android:gravity="center"
                         android:layout_marginEnd="10dp"
                         android:textColor="@color/white"
-                        android:text="发送验证码" />
+                        android:text="发送验证码"
+                        tools:ignore="HardcodedText"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -167,13 +171,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <EditText
+                    <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
                         android:id="@+id/new_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="请输入新密码"
+                        tools:ignore="HardcodedText"
                         android:inputType="textPassword"
-                        android:singleLine="true" />
+                        android:maxLines="1" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -184,13 +189,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <EditText
+                    <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
                         android:id="@+id/new_password1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="请再次输入密码"
                         android:inputType="textPassword"
-                        android:singleLine="true" />
+                        android:maxLines="1"
+                        tools:ignore="HardcodedText"/>
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -209,7 +215,8 @@
                         android:layout_marginEnd="10dp"
                         android:textColor="@color/white"
                         android:textStyle="bold"
-                        android:text="确认" />
+                        android:text="确认"
+                        tools:ignore="HardcodedText"/>
                 </FrameLayout>
 
 

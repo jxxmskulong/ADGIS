@@ -3,7 +3,6 @@ package com.xia.adgis.Main.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,7 +27,7 @@ import com.xia.adgis.R;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@SuppressWarnings("unchecked")
 public class SearchActivity extends SwipeBackActivityImpl implements SearchView.SearchViewListener {
 
     /**
@@ -87,8 +86,6 @@ public class SearchActivity extends SwipeBackActivityImpl implements SearchView.
      * 提示框显示项的个数
      */
     private static int hintSize = DEFAULT_HINT_SIZE;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,11 +170,12 @@ public class SearchActivity extends SwipeBackActivityImpl implements SearchView.
         try {
             String sql = "select * from history";
             Cursor cursor = database.rawQuery(sql,null);
+            cursor.close();
             while (cursor.moveToNext()){
                 hintData.add(cursor.getString(cursor.getColumnIndex("name")));
             }
         }catch (Exception e){
-
+            Toast.makeText(this, e.getMessage() , Toast.LENGTH_SHORT).show();
         }
         hintAdapter = new UserNameHistoryAdapter(this, R.layout.search_history_item, hintData);
     }
@@ -231,7 +229,6 @@ public class SearchActivity extends SwipeBackActivityImpl implements SearchView.
 
     /**
      * 当搜索框 文本改变时 触发的回调 ,更新自动补全数据
-     * @param text
      */
     @Override
     public void onRefreshAutoComplete(String text) {
@@ -242,7 +239,6 @@ public class SearchActivity extends SwipeBackActivityImpl implements SearchView.
     /**
      * 点击搜索键时edit text触发的回调
      *
-     * @param text
      */
     @Override
     public void onSearch(String text) {

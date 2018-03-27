@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -20,7 +21,8 @@
             android:textSize="15sp"
             android:layout_weight="1"
             android:textColor="@color/colorPrimaryDark"
-            android:text="取消" />
+            android:text="取消"
+            tools:ignore="HardcodedText"/>
 
         <TextView
             android:id="@+id/title"
@@ -31,7 +33,8 @@
             android:layout_weight="2"
             android:text="更换手机"
             android:textColor="@color/black"
-            android:gravity="center"/>
+            android:gravity="center"
+            tools:ignore="HardcodedText"/>
 
         <TextView
             android:id="@+id/confirm"
@@ -39,10 +42,11 @@
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:layout_weight="1"
-            android:gravity="right"
+            android:gravity="end"
             android:textSize="15sp"
             android:textColor="@color/colorPrimaryDark"
-            android:text="确定" />
+            android:text="确定"
+            tools:ignore="HardcodedText"/>
     </LinearLayout>
 
     <LinearLayout
@@ -57,7 +61,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginTop="2dp"
             android:padding="10dp"
-            android:text="+86" />
+            android:text="+86"
+            tools:ignore="HardcodedText"/>
 
         <com.flyco.roundview.RoundLinearLayout
             android:layout_width="0dp"
@@ -76,13 +81,14 @@
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:hint="请输入手机号码"
+            tools:ignore="HardcodedText"
             android:textIsSelectable="true"
             android:maxLength="11"
             android:paddingEnd="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:paddingStart="15dp"
-            android:singleLine="true"
+            android:maxLines="1"
             android:textColor="#ff666666"
             android:textColorHint="#ffbdbdbd"
             android:textSize="18sp" />
@@ -118,12 +124,13 @@
             android:layout_height="match_parent"
             android:hint="请入验证码"
             android:background="#00000000"
+            tools:ignore="HardcodedText"
             android:padding="10dp"
             android:gravity="center"
             android:inputType="number"
             android:textIsSelectable="true"
             android:maxLength="6"
-            android:singleLine="true"
+            android:maxLines="1"
             android:textColor="#ff666666"
             android:textColorHint="#88b5b5b5"/>
         </com.flyco.roundview.RoundLinearLayout>
@@ -135,9 +142,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:textColor="@color/white"
-            android:text="发送验证码" />
+            android:text="发送验证码"
+            tools:ignore="HardcodedText"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -1,6 +1,5 @@
 package com.xia.adgis.Main.Activity;
 
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -712,7 +711,6 @@ public class MainActivity extends SwipeBackActivityImpl implements AMap.OnMarker
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                SettingFragment setting = new SettingFragment();
 
             }
 

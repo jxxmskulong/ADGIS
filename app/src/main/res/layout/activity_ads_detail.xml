@@ -28,7 +28,8 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/userback"
                     android:transitionName="@string/detail_image"
-                    android:layout_marginBottom="300dp"/>
+                    android:layout_marginBottom="300dp"
+                    android:contentDescription="@string/app_name"/>
             </LinearLayout>
         </ScrollView>
 
@@ -57,7 +58,8 @@
                     android:textSize="18sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    tools:ignore="HardcodedText"/>
 
                 <View
                     android:background="#e0e0e0"

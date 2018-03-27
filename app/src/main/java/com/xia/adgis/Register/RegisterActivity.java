@@ -104,8 +104,6 @@ public class RegisterActivity extends AppCompatActivity implements PopupWindow.O
     Button userRegister;
     //注册相关
     private UserLoginTask mAuthTask = null;
-    @BindView(R.id.register_form)
-    View mProgressView;
     //相册选图标记
     private static final int GALLERY_REQUEST = 0;
     //相机拍照标记

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp">
 
@@ -13,7 +15,8 @@
         android:layout_weight="3"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="0dp"
         android:text="TextView" />
 
     <ImageView
@@ -21,7 +24,9 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:paddingRight="10dp"
-        android:src="@drawable/close" />
+        android:paddingEnd="10dp"
+        android:paddingStart="0dp"
+        android:src="@drawable/close"
+        android:contentDescription="@string/app_name"/>
 
 </LinearLayout>

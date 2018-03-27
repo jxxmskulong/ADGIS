@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    tools:ignore="HardcodedText"
     tools:context="com.xia.adgis.Main.Fragment.ADsMaintainFragment">
 
     <!-- TODO: Update blank fragment layout -->

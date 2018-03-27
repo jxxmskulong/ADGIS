@@ -15,7 +15,6 @@ import android.view.WindowManager;
  *
  * Created by xiati on 2018/2/22.
  */
-
 public abstract class BaseBottomDialog extends DialogFragment {
 
     private static final String TAG = "base_bottom_dialog";

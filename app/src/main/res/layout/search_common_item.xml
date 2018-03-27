@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="10dp"
+    tools:ignore="HardcodedText">
     <ImageView
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:paddingLeft="5dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="0dp"
         android:src="@drawable/search_icon" />
     <TextView
         android:id="@+id/user_common_context"
@@ -15,14 +20,17 @@
         android:layout_height="match_parent"
         android:layout_weight="4"
         android:textColor="@color/black"
-        android:paddingLeft="15dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="0dp"
         android:text="TextView" />
 
     <ImageView
+        android:contentDescription="@string/app_name"
         android:id="@+id/user_common_delete"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:paddingRight="8dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="8dp"
         android:src="@drawable/home_search_close" />
 </LinearLayout>

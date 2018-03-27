@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:gravity="center_horizontal"
     android:layout_height="match_parent"
@@ -15,6 +16,7 @@
             android:background="@drawable/main_button"
             android:padding="10dp"
             android:text="拍照"
+            tools:ignore="HardcodedText"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -31,7 +33,8 @@
             android:text="从相册选择"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText"/>
 
         <Button
             android:id="@+id/picture_selector_cancel"
@@ -44,6 +47,7 @@
             android:background="@drawable/cancel_buttom"
             android:padding="10dp"
             android:text="取消"
+            tools:ignore="HardcodedText"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />

@@ -119,7 +119,8 @@
                             android:id="@+id/fmc_center_dynamic">
                             <TextView style="@style/AppTheme.CommonBar.Content.Value"
                                 android:gravity="center"
-                                android:text="个人信息"/>
+                                android:text="个人信息"
+                                tools:ignore="HardcodedText"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -178,7 +179,8 @@
                         <TextView style="@style/AppTheme.Label.Title"
                             android:layout_gravity="center_vertical"
                             android:textColor="@android:color/tertiary_text_dark"
-                            android:text="用户名"/>
+                            android:text="用户名"
+                            tools:ignore="HardcodedText"/>
                         <TextView style="@style/AppTheme.Label.Discription"
                             android:id="@+id/centre_username"
                             android:layout_gravity="center_vertical"
@@ -220,7 +222,7 @@
                                         android:layout_margin="@dimen/padding_common"
                                         android:contentDescription="@string/app_name"
                                         android:tint="#cccccc"
-                                        app:srcCompat="@drawable/ic_centre_mail"/>
+                                        app:srcCompat="@drawable/ic_centre_mail" />
                                 </com.flyco.roundview.RoundFrameLayout>
                                 <View
                                     android:layout_width="@dimen/division_line"
@@ -240,7 +242,8 @@
                                 <TextView style="@style/AppTheme.Label.Title"
                                     android:layout_gravity="center_vertical"
                                     android:textColor="@android:color/tertiary_text_dark"
-                                    android:text="邮箱"/>
+                                    android:text="邮箱"
+                                    tools:ignore="HardcodedText"/>
                                 <TextView style="@style/AppTheme.Label.Discription"
                                     android:id="@+id/centre_mail"
                                     android:layout_gravity="center_vertical"
@@ -303,7 +306,8 @@
                                 <TextView style="@style/AppTheme.Label.Title"
                                     android:layout_gravity="center_vertical"
                                     android:textColor="@android:color/tertiary_text_dark"
-                                    android:text="电话"/>
+                                    android:text="电话"
+                                    tools:ignore="HardcodedText"/>
                                 <TextView style="@style/AppTheme.Label.Discription"
                                     android:id="@+id/centre_phone"
                                     android:layout_gravity="center_vertical"
@@ -366,7 +370,8 @@
                                 <TextView style="@style/AppTheme.Label.Title"
                                     android:layout_gravity="center_vertical"
                                     android:textColor="@android:color/tertiary_text_dark"
-                                    android:text="性别"/>
+                                    android:text="性别"
+                                    tools:ignore="HardcodedText"/>
                                 <TextView style="@style/AppTheme.Label.Discription"
                                     android:id="@+id/centre_sex"
                                     android:layout_gravity="center_vertical"
@@ -429,7 +434,8 @@
                                 <TextView style="@style/AppTheme.Label.Title"
                                     android:layout_gravity="center_vertical"
                                     android:textColor="@android:color/tertiary_text_dark"
-                                    android:text="生日"/>
+                                    android:text="生日"
+                                    tools:ignore="HardcodedText"/>
                                 <TextView style="@style/AppTheme.Label.Discription"
                                     android:id="@+id/centre_birthday"
                                     android:layout_gravity="center_vertical"
@@ -492,7 +498,8 @@
                                 <TextView style="@style/AppTheme.Label.Title"
                                     android:layout_gravity="center_vertical"
                                     android:textColor="@android:color/tertiary_text_dark"
-                                    android:text="地区"/>
+                                    android:text="地区"
+                                    tools:ignore="HardcodedText"/>
                                 <TextView style="@style/AppTheme.Label.Discription"
                                     android:id="@+id/centre_area"
                                     android:layout_gravity="center_vertical"
